@@ -1,0 +1,61 @@
+i.) Requête de base 
+
+Question 1 :
+SELECT DISTINCT nomc 
+FROM L2I_reser
+ORDER BY nomc;  (ORDER BY DESC/ASC)
+
+Question 2 :
+SELECT nc, prix
+FROM L2I_circuit 
+ORDER BY prix desc;
+
+Question 3 :
+SELECT nc, vdep
+FROM L2I_circuit
+ORDER BY vdep;
+
+ii.) Affichage des dates
+
+Question 1 : 
+SELECT nomc
+FROM L2I_reser
+WHERE to_char(datedep,'yyyy')=2005;
+
+Question 2 :
+SELECT nomc 
+FROM L2I_reser
+WHERE to_char(datedep,'MON-yyyy')='APR-2006';
+
+Question 3 :
+SELECT nomc, datedep
+FROM L2I_reser 
+WHERE (to_char(sysdate,'yyyy') - to_char(datedep,'yyyy') ) <= 2;
+
+iii.) Emploi de IN, SELECT et BETWEEN
+
+Question 1 :
+SELECT nomc 
+FROM L2I_reser 
+WHERE to_char(datedep,'mon')='MAY' or to_char(datedep,'mon')='sep';
+
+Question 2 :
+SELECT DISTINCT nc
+FROM L2I_CIRETAPE 
+WHERE upper(vilet)<>'LONDRES' AND upper(vilet)<>'AMSTERDAM';
+(ou WHERE nc not in(select distinct nc from L2I_ciretape where vilet in ('Amsterdam','Londres');)
+
+Question 3 :
+SELECT nr,nc
+FROM L2I_reser
+WHERE to_char(datedep,'mm') between 04 and 09;
+
+Question 4 :
+SELECT nc,datedep,nbres
+FROM L2I_reser
+WHERE nomc='Picsou';
+
+Question 5 :
+SELECT nomv
+FROM L2I_ville
+WHERE upper(nomv) like '%PORT%';
